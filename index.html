@@ -98,9 +98,15 @@
 
       // Actualizar los contenidos de los rectángulos con los resultados
       document.getElementById("resultadoCBM").textContent = "CBM: " + cbm.toFixed(4);
-      document.getElementById("costoEnvio").textContent = "Costo de envío: " + costoEnvio.toFixed(2);
-      document.getElementById("costoProducto").textContent = "Costo producto: " + costoProducto.toFixed(2);
-      document.getElementById("total").textContent = "Total: " + total.toFixed(2);
+      
+      document.getElementById("costoEnvio").textContent = "Costo de envío: " + 
+        costoEnvio.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
+      
+      document.getElementById("costoProducto").textContent = "Costo producto: " + 
+        costoProducto.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
+      
+      document.getElementById("total").textContent = "Total: " + 
+        total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
     }
   </script>
 </body>
