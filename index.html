@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora Inversion</title>
+  <title>Calculadora de Costos</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -39,7 +39,7 @@
     button:hover {
       background: #45a049;
     }
-    .resultado, .resultado2 {
+    .resultado, .resultado2, .resultado3, .resultado4 {
       background: #e9ecef;
       margin: 15px auto;
       padding: 10px;
@@ -52,32 +52,50 @@
 </head>
 <body>
   <div class="calculator">
-    <h2>Calculadora De Inversion</h2>
+    <h2>Calculadora de Costos</h2>
     <!-- Input para que el usuario ingrese la cantidad -->
     <input type="number" id="cantidad" placeholder="Cantidad" />
+
     <!-- Botón para ejecutar el cálculo -->
     <button onclick="calcular()">Calcular</button>
     
     <!-- Rectángulo para mostrar el CBM -->
     <div class="resultado" id="resultadoCBM"></div>
     
-    <!-- Rectángulo para mostrar el resultado final: CBM * 700 -->
-    <div class="resultado2" id="resultadoFinal"></div>
+    <!-- Rectángulo para mostrar Costo de Envío -->
+    <div class="resultado2" id="costoEnvio"></div>
+    
+    <!-- Rectángulo para mostrar Costo Producto -->
+    <div class="resultado3" id="costoProducto"></div>
+    
+    <!-- Rectángulo para mostrar la suma de Costo de Envío + Costo Producto -->
+    <div class="resultado4" id="total"></div>
   </div>
 
   <script>
     function calcular() {
       // Obtener el valor ingresado en el input "Cantidad"
       var cantidad = parseFloat(document.getElementById("cantidad").value) || 0;
+      
       // Calcular CBM: Cantidad * 0.0066
       var cbm = cantidad * 0.0066;
-      // Calcular el resultado final: CBM * 700
-      var resultadoFinal = cbm * 700;
+      
+      // Calcular Costo de envío: CBM * 700
+      var costoEnvio = cbm * 700;
+      
+      // Calcular Costo producto: Cantidad * 5.90
+      var costoProducto = cantidad * 5.90;
+      
+      // Calcular la suma total: Costo de envío + Costo producto
+      var total = costoEnvio + costoProducto;
 
-      // Actualizar el contenido de los rectángulos con el resultado
+      // Actualizar los contenidos de los rectángulos con los resultados
       document.getElementById("resultadoCBM").textContent = "CBM: " + cbm.toFixed(4);
-      document.getElementById("resultadoFinal").textContent = "Resultado: " + resultadoFinal.toFixed(2);
+      document.getElementById("costoEnvio").textContent = "Costo de envío: " + costoEnvio.toFixed(2);
+      document.getElementById("costoProducto").textContent = "Costo producto: " + costoProducto.toFixed(2);
+      document.getElementById("total").textContent = "Total: " + total.toFixed(2);
     }
   </script>
 </body>
 </html>
+
