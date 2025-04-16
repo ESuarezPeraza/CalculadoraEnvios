@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora Inversion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+      text-align: center;
+    }
+    .calculator {
+      background: #fff;
+      max-width: 350px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    input[type="number"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px 0;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .resultado, .resultado2 {
+      background: #e9ecef;
+      margin: 15px auto;
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Calculadora De Inversion</h2>
+    <!-- Input para que el usuario ingrese la cantidad -->
+    <input type="number" id="cantidad" placeholder="Cantidad" />
+    <!-- Botón para ejecutar el cálculo -->
+    <button onclick="calcular()">Calcular</button>
+    
+    <!-- Rectángulo para mostrar el CBM -->
+    <div class="resultado" id="resultadoCBM"></div>
+    
+    <!-- Rectángulo para mostrar el resultado final: CBM * 700 -->
+    <div class="resultado2" id="resultadoFinal"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      // Obtener el valor ingresado en el input "Cantidad"
+      var cantidad = parseFloat(document.getElementById("cantidad").value) || 0;
+      // Calcular CBM: Cantidad * 0.0066
+      var cbm = cantidad * 0.0066;
+      // Calcular el resultado final: CBM * 700
+      var resultadoFinal = cbm * 700;
+
+      // Actualizar el contenido de los rectángulos con el resultado
+      document.getElementById("resultadoCBM").textContent = "CBM: " + cbm.toFixed(4);
+      document.getElementById("resultadoFinal").textContent = "Resultado: " + resultadoFinal.toFixed(2);
+    }
+  </script>
+</body>
+</html>
