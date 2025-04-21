@@ -25,13 +25,21 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    input[type="number"] {
-      width: 80%;
+    select{
+      width: 91%;
       padding: 10px;
       margin: 10px 0;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 5px;
+    }
+      input[type="number"] {
+      width: 84%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px; 
     }
     button {
       padding: 10px 20px;
@@ -60,55 +68,81 @@
 <body>
   <div class="calculator">
     <h2>Calculadora de Costos</h2>
+
+    <!-- Selector de opción -->
+    <select id="opcion">
+      <option value="1">Opción 1</option>
+      <option value="2">Opción 2</option>
+      <option value="3">Opción 3</option>
+    </select>
+
     <!-- Input para que el usuario ingrese la cantidad -->
     <input type="number" id="cantidad" placeholder="Cantidad a traer" />
 
     <!-- Botón para ejecutar el cálculo -->
     <button onclick="calcular()">Calcular</button>
     
-    <!-- Rectángulo para mostrar el CBM -->
+    <!-- Rectángulos para mostrar resultados -->
     <div class="resultado" id="resultadoCBM"></div>
-    
-    <!-- Rectángulo para mostrar Costo de Envío -->
     <div class="resultado2" id="costoEnvio"></div>
-    
-    <!-- Rectángulo para mostrar Costo Producto -->
     <div class="resultado3" id="costoProducto"></div>
-    
-    <!-- Rectángulo para mostrar la suma de Costo de Envío + Costo Producto -->
     <div class="resultado4" id="total"></div>
   </div>
 
   <script>
     function calcular() {
-      // Obtener el valor ingresado en el input "Cantidad"
+      // Leer selección
+      var opcion = document.getElementById("opcion").value;
+      // Obtener cantidad
       var cantidad = parseFloat(document.getElementById("cantidad").value) || 0;
       
-      // Calcular CBM: Cantidad * 0.0066
-      var cbm = cantidad * 0.0066;
+      // Variables por defecto
+      var factorCbm, precioProducto;
       
-      // Calcular Costo de envío: CBM * 700
-      var costoEnvio = cbm * 700;
-      
-      // Calcular Costo producto: Cantidad * 5.90
-      var costoProducto = cantidad * 5.90;
-      
-      // Calcular la suma total: Costo de envío + Costo producto
-      var total = costoEnvio + costoProducto;
+      // Ajustar factores según la opción
+      switch(opcion) {
+        case "1":
+          factorCbm     = 0.0066;
+          precioProducto = 5.90;
+          break;
+        case "2":
+          factorCbm     = 0.0043;
+          precioProducto = 4.28;
+          break;
+        case "3":
+          factorCbm     = 0.026;
+          precioProducto = 8.20;
+          break;
+        default:
+          factorCbm     = 0;
+          precioProducto = 0;
+      }
 
-      // Actualizar los contenidos de los rectángulos con los resultados
-      document.getElementById("resultadoCBM").textContent = "CBM: " + cbm.toFixed(4);
+      // Cálculos
+      var cbm          = cantidad * factorCbm;
+      var costoEnvio   = cbm * 700;
+      var costoProducto= cantidad * precioProducto;
+      var total        = costoEnvio + costoProducto;
+
+      // Mostrar resultados
+      document.getElementById("resultadoCBM").textContent =
+        "CBM: " + cbm.toFixed(4);
       
-      document.getElementById("costoEnvio").textContent = "Costo de envío: " + 
-        costoEnvio.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
+      document.getElementById("costoEnvio").textContent =
+        "Costo de envío: " +
+        costoEnvio.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) +
+        " $";
       
-      document.getElementById("costoProducto").textContent = "Costo producto: " + 
-        costoProducto.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
+      document.getElementById("costoProducto").textContent =
+        "Costo producto: " +
+        costoProducto.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) +
+        " $";
       
-      document.getElementById("total").textContent = "Total: " + 
-        total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
+      document.getElementById("total").textContent =
+        "Total: " +
+        total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) +
+        " $";
     }
   </script>
 </body>
 </html>
-
